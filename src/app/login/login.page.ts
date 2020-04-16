@@ -23,4 +23,12 @@ export class LoginPage implements OnInit {
     console.log("sign up")
   }
 
+  loginGoogle() {
+    console.log("login google")
+  }
+
+  loginFacebook() {
+    console.log("login facebook")
+  }
+
 }
