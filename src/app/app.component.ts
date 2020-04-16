@@ -25,7 +25,7 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'Search by city',
-      url: '/folder/SearchByCity',
+      url: '/search-by-city',
       icon: 'search'
     },
     {

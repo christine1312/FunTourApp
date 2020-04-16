@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Search By City</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        <ion-icon slot="icon-only" name="log-out"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <div id="searchElements">    
+
+    <ion-label color="primary" position="floating">City</ion-label>
+      <ion-input id="city" type="text" [(ngModel)]='city'></ion-input>
+  
+    <ion-label color="primary" position="floating">State</ion-label>
+      <ion-input id="state" type="text" [(ngModel)]='state'></ion-input>
+
+    <ion-label color="primary" position="floating">Country</ion-label>
+      <ion-input id="country" type="text" [(ngModel)]='country'></ion-input>
+  
+      <br>
+  
+    <ion-button class="submit-btn" expand="block" type="submit" (click)="search()">Search</ion-button>
+  </div>
+
+</ion-content>
