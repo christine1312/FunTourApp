@@ -29,6 +29,11 @@ export class AppComponent implements OnInit {
       icon: 'search'
     },
     {
+      title: 'Search with Google',
+      url: '/folder/SearchWithGoogle',
+      icon: 'logo-google'
+    },
+    {
       title: 'Add attraction',
       url: '/folder/AddAttraction',
       icon: 'add'
