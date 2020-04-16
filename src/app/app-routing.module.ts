@@ -23,9 +23,11 @@ const routes: Routes = [
   {
     path: 'search-by-city',
     loadChildren: () => import('./search-by-city/search-by-city.module').then( m => m.SearchByCityPageModule)
+  },
+  {
+    path: 'add-traveler',
+    loadChildren: () => import('./add-traveler/add-traveler.module').then( m => m.AddTravelerPageModule)
   }
-
-
 ];
 
 @NgModule({
