@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>New Traveler</ion-title>
+    <ion-buttons slot = "start">
+      <ion-back-button defaultHref = 'folder/Inbox'></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-img [src] = "traveler_image"></ion-img>
+
+  <form [formGroup] = "new_traveler_form" (submit) = "addTraveler(new_traveler_form.value)">
+    <ion-item>
+      <ion-label color = "primary" position = "floating">Name</ion-label>
+      <ion-input type = "text" formControlName = "name" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color = "primary" position = "floating">Phone Number</ion-label>
+      <ion-input type = "text" formControlName = "phone" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color = "primary" position = "floating">Items</ion-label>
+      <ion-input type = "text" formControlName = "items" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color = "primary" position = "floating">Needs</ion-label>
+      <ion-input type = "text" formControlName = "needs" required></ion-input>
+    </ion-item>
+    <ion-button class = "submit-btn" expand = "block" type = "submit" [disabled]="!new_traveler_form.valid">
+      Add Traveler
+    </ion-button>
+  </form>
+</ion-content>

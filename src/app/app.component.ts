@@ -4,6 +4,20 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
+import * as firebase from 'firebase';
+
+/* firebase config settings */
+var firebaseConfig = {
+  apiKey: "AIzaSyABRQvxgM5ukRQSiGynIUcDrTQUwKydOSI",
+  authDomain: "fun-tourist-app.firebaseapp.com",
+  databaseURL: "https://fun-tourist-app.firebaseio.com",
+  projectId: "fun-tourist-app",
+  storageBucket: "fun-tourist-app.appspot.com",
+  messagingSenderId: "913083674329",
+  appId: "1:913083674329:web:1360cc7492950b2ef0d8c8",
+  measurementId: "G-MMGJ1BJGQZ"
+};
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -38,6 +52,11 @@ export class AppComponent implements OnInit {
       url: '/folder/AddAttraction',
       icon: 'add'
     },
+    {
+      title: 'Add Traveler',
+      url: 'add-traveler',
+      icon: 'body'
+    }
   ];
   //public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
