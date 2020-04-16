@@ -23,7 +23,11 @@ const routes: Routes = [
   {
     path: 'search-by-city',
     loadChildren: () => import('./search-by-city/search-by-city.module').then( m => m.SearchByCityPageModule)
+  },  {
+    path: 'add-attraction',
+    loadChildren: () => import('./add-attraction/add-attraction.module').then( m => m.AddAttractionPageModule)
   }
+
 
 
 ];
