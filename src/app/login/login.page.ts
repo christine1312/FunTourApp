@@ -19,4 +19,8 @@ export class LoginPage implements OnInit {
     this.router.navigate(['/folder/Inbox'])
   }
 
+  signup() {
+    console.log("sign up")
+  }
+
 }
