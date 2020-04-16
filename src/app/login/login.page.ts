@@ -16,7 +16,7 @@ export class LoginPage implements OnInit {
   }
 
   login() {
-    this.router.navigate(['/folder/Inbox'])
+    this.router.navigate(['/folder/MyPlan'])
   }
 
   signup() {
