@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>New Item</ion-title>
+    <ion-buttons slot = "start">
+      <ion-back-button defaultHref = 'folder/Inbox'></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-img [src] = "packing_item_image"></ion-img>
+
+  <form [formGroup] = "new_item_form" (submit) = "addItem(new_item_form.value)">
+    <ion-item>
+      <ion-label color = "primary" position = "floating">Name</ion-label>
+      <ion-input type = "text" formControlName = "name" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color = "primary" position = "floating">Category</ion-label>
+      <ion-select placeholder = "Select one"  formControlName = "category" required>
+        <ion-select-option value = "first-aid">first-aid</ion-select-option>
+        <ion-select-option value = "food">food</ion-select-option>
+        <ion-select-option value = "drink">drink</ion-select-option>
+        <ion-select-option value = "personal hygiene">personal hygiene</ion-select-option>
+        <ion-select-option value = "other">other</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label color = "primary" position = "floating">How Many?</ion-label>
+      <ion-input type = "text" formControlName = "quantity" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color = "primary" position = "floating">Who will bring it?</ion-label>
+      <ion-input type = "text" formControlName = "who" required></ion-input>
+    </ion-item>
+    <ion-button class = "submit-btn" expand = "block" type = "submit" [disabled]="!new_item_form.valid">
+      Add Item
+    </ion-button>
+  </form>
+
+</ion-content>

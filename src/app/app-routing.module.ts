@@ -27,7 +27,11 @@ const routes: Routes = [
   {
     path: 'add-traveler',
     loadChildren: () => import('./add-traveler/add-traveler.module').then( m => m.AddTravelerPageModule)
+  },  {
+    path: 'add-packing-item',
+    loadChildren: () => import('./add-packing-item/add-packing-item.module').then( m => m.AddPackingItemPageModule)
   }
+
 ];
 
 @NgModule({
