@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'Add attraction',
-      url: '/folder/AddAttraction',
+      url: '/add-attraction',
       icon: 'add'
     },
     {

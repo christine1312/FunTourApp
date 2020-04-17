@@ -27,6 +27,10 @@ const routes: Routes = [
   {
     path: 'add-traveler',
     loadChildren: () => import('./add-traveler/add-traveler.module').then( m => m.AddTravelerPageModule)
+  },
+  {
+    path: 'add-attraction',
+    loadChildren: () => import('./add-attraction/add-attraction.module').then( m => m.AddAttractionPageModule)
   }
 ];
 
