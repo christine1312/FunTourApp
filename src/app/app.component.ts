@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'Add attraction',
-      url: '/folder/AddAttraction',
+      url: '/add-attraction',
       icon: 'add'
     },
     {
@@ -78,6 +78,7 @@ export class AppComponent implements OnInit {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+    firebase.initializeApp(firebaseConfig);
   }
 
   ngOnInit() {

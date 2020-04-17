@@ -32,6 +32,10 @@ const routes: Routes = [
     path: 'add-packing-item',
     loadChildren: () => import('./add-packing-item/add-packing-item.module').then( m => m.AddPackingItemPageModule)
   },
+  {
+    path: 'add-attraction',
+    loadChildren: () => import('./add-attraction/add-attraction.module').then( m => m.AddAttractionPageModule)
+  }
 ];
 
 @NgModule({
