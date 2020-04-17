@@ -31,7 +31,11 @@ export class AddTravelerPage implements OnInit {
   }
 
   goBack() {
-    this.Router.navigate(['folder/Inbox'])
+    this.Router.navigate(['folder/Inbox']);
+  }
+
+  addTraveler() {
+    this.Router.navigate(['folder/Inbox']);
   }
 
 }

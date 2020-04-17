@@ -29,6 +29,10 @@ const routes: Routes = [
     loadChildren: () => import('./add-traveler/add-traveler.module').then( m => m.AddTravelerPageModule)
   },
   {
+    path: 'add-packing-item',
+    loadChildren: () => import('./add-packing-item/add-packing-item.module').then( m => m.AddPackingItemPageModule)
+  },
+  {
     path: 'add-attraction',
     loadChildren: () => import('./add-attraction/add-attraction.module').then( m => m.AddAttractionPageModule)
   }

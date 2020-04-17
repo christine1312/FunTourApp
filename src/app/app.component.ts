@@ -56,6 +56,11 @@ export class AppComponent implements OnInit {
       title: 'Add Traveler',
       url: 'add-traveler',
       icon: 'body'
+    },
+    {
+      title: 'Add to Packing List',
+      url: 'add-packing-item',
+      icon: 'briefcase'
     }
   ];
   //public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
