@@ -1,9 +1,41 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>create-trip</ion-title>
+    <ion-title>Let's Start a New Trip!</ion-title>
+    <ion-buttons slot = "start">
+      <ion-back-button defaultHref = 'my-trips'></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
 
+  <form [formGroup] = "new_trip_form" (submit) = "addTrip(new_trip_form.value)">
+    <ion-item>
+      <ion-label color = "primary" position = "floating">Name</ion-label>
+      <ion-input type = "text" formControlName = "name" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color = "primary" position = "floating">Budget</ion-label>
+      <ion-input type = "text" formControlName = "budget" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color = "primary" position = "floating">Category</ion-label>
+      <ion-select placeholder = "Select one"  formControlName = "category" required>
+        <ion-select-option value = "vacation">vacation</ion-select-option>
+        <ion-select-option value = "work">work</ion-select-option>
+        <ion-select-option value = "other">other</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-item>
+      <ion-label color = "primary" position = "floating">Start Date</ion-label>
+      <ion-input type = "text" formControlName = "start" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label color = "primary" position = "floating">End Date</ion-label>
+      <ion-input type = "text" formControlName = "end" required></ion-input>
+    </ion-item>
+    <ion-button class = "submit-btn" expand = "block" type = "submit" [disabled]="!new_trip_form.valid">
+      Create Trip
+    </ion-button>
+  </form>
 </ion-content>

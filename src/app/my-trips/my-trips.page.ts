@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-trips',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyTripsPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private Router: Router
+  ) { }
 
   ngOnInit() {
+  }
+
+  startNewTrip() {
+    this.Router.navigate(['create-trip']);
   }
 
 }
