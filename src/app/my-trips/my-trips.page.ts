@@ -10,9 +10,9 @@ export class MyTripsPage implements OnInit {
 
   /* a collection of trips made by the user */
   trips = [
-    {"name":"Vacation to Sweden"},
-    {"name":"Vacation to Berlin"},
-    {"name":"Vacation to Paradise Falls"}
+    {"name":"Vacation to Sweden", "budget":"200", "category":"vacation", "start":"xx/xx/xx", "end":"xx/xx/xx"},
+    {"name":"Vacation to Berlin", "budget":"200", "category":"vacation", "start":"xx/xx/xx", "end":"xx/xx/xx"},
+    {"name":"Vacation to Paradise Falls","budget":"200", "category":"vacation", "start":"xx/xx/xx", "end":"xx/xx/xx"}
   ];
 
   constructor(
