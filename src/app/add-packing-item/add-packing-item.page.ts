@@ -33,7 +33,7 @@ export class AddPackingItemPage implements OnInit {
   }
 
   goBack() {
-    this.Router.navigate(['/folder/MyPlan']);
+    this.Router.navigate(['my-trips']);
   }
 
   /* calls addItem function from item service to add a new item to the database */
