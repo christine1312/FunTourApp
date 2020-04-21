@@ -53,16 +53,6 @@ export class AppComponent implements OnInit {
       icon: 'add'
     },
     {
-      title: 'Add Traveler',
-      url: 'add-traveler',
-      icon: 'body'
-    },
-    {
-      title: 'Add to Packing List',
-      url: 'add-packing-item',
-      icon: 'briefcase'
-    },
-    {
       title: 'My Trips',
       url: 'my-trips',
       icon: 'briefcase'
