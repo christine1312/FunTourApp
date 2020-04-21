@@ -4,19 +4,19 @@ import * as firebase from 'Firebase';
 @Injectable({
   providedIn: 'root'
 })
-export class TravelersService {
-  
+export class ItemsService {
+
   constructor() { }
 
   /*************************************************************************
-   * addTraveler() adds a new traveler to a given trip
-   * name - name of the traveler - e.g. John Doe
-   * phone - phone number of the traveler - e.g. xxx-xxx-xxx
-   * items - all of the items the traveler will bring - e.g. chips
-   * needs - any necessary items the traveler needs - e.g. contacts
+   * addItem() adds a new item to the packing list for a given trip
+   * name - name of the item - e.g. chips
+   * category - the type of item - e.g. food, first-aid, etc.
+   * quantity - how many - e.g. 2
+   * who - name of the traveler who will bring it - e.g. John Doe
    *************************************************************************/
-  addTraveler(name, phone, items, needs) {
-    console.log("addTraveler()");
+  addItem(name, category, quantity, who) {
+    console.log("addItem()");
     /* getting the uid of the account that created the new traveler */
     /*
     var uid = null;
@@ -31,20 +31,20 @@ export class TravelersService {
       return;
     }*/
 
-    /* add the new traveler to the database */
+    /* add the new item to the packing list */
     var db = firebase.firestore();
-    db.collection("travelers").add({
+    db.collection("items").add({
       //'uid':uid,
       'name':name,
-      'phone':phone,
-      'items':items,
-      'needs':needs,
+      'category':category,
+      'quantity':quantity,
+      'who':who,
       'trip id':"dummy"
     })
     .then(function(docRef) {
       /* successfully added to firebase */
       console.log("Document Written with ID: " + docRef.id);
-      alert(name + " has been added to your trip!");
+      alert(name + " has been added to your trip's packing list!");
     })
     .catch(function(error) {
       /* an error occurred */
@@ -52,7 +52,4 @@ export class TravelersService {
       alert("Oops! Something went wrong!");
     });
   }
-
-
-
 }

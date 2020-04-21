@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ItemsService } from '../items.service';
 
 @Component({
   selector: 'app-add-packing-item',
@@ -17,6 +18,7 @@ export class AddPackingItemPage implements OnInit {
 
   constructor(
     public formBuilder: FormBuilder,
+    public itemServices: ItemsService,
     private Router: Router
   ) { }
 
@@ -31,10 +33,19 @@ export class AddPackingItemPage implements OnInit {
   }
 
   goBack() {
-    this.Router.navigate(['folder/Inbox'])
+    this.Router.navigate(['/folder/MyPlan']);
   }
 
+  /* calls addItem function from item service to add a new item to the database */
   addItem(item) {
+    /* logging input parameters for new item for future reference */
+    console.log(item.name);
+    console.log(item.category);
+    console.log(item.quantity);
+    console.log(item.who);
+    /* send new item to addItem() in items service */
+    this.itemServices.addItem(item.name, item.category, item.quantity, item.who);
+    /* send user back to previous page */
     this.goBack();
   }
 
