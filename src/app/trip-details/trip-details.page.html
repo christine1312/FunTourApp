@@ -8,6 +8,22 @@
 </ion-header>
 
 <ion-content>
-  <h1>{{ current_trip.name }}</h1>
+  <ion-list>
+    <ion-item-divider>
+      <div style = "width: 100%; text-align: center;">{{ current_trip.name }}</div>
+    </ion-item-divider>
+    <ion-item-divider>
+      <div style = "width: 100%; text-align: center;">${{ current_trip.budget }}</div>
+    </ion-item-divider>
+    <ion-item-divider>
+      <div style = "width: 100%; text-align: center;">{{ current_trip.category }}</div>
+    </ion-item-divider>
+    <ion-item-divider>
+      <div style = "width: 100%; text-align: center;">{{ current_trip.start }}</div>
+    </ion-item-divider>
+    <ion-item-divider>
+      <div style = "width: 100%; text-align: center;">{{ current_trip.end }}</div>
+    </ion-item-divider>
+  </ion-list>
   <ion-button expand = "full" color = "primary" (click) = "editTrip()">Edit Trip</ion-button>
 </ion-content>
