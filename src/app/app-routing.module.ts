@@ -35,7 +35,11 @@ const routes: Routes = [
   {
     path: 'add-attraction',
     loadChildren: () => import('./add-attraction/add-attraction.module').then( m => m.AddAttractionPageModule)
+  },  {
+    path: 'signup',
+    loadChildren: () => import('./signup/signup.module').then( m => m.SignupPageModule)
   }
+
 ];
 
 @NgModule({
