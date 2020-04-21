@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TravelersService } from '../travelers.service';
 
 @Component({
   selector: 'app-add-traveler',
@@ -17,6 +18,7 @@ export class AddTravelerPage implements OnInit {
 
   constructor(
     public formBuilder: FormBuilder,
+    public travelersService: TravelersService,
     private Router: Router
   ) { }
 
@@ -34,8 +36,17 @@ export class AddTravelerPage implements OnInit {
     this.Router.navigate(['folder/Inbox']);
   }
 
-  addTraveler() {
-    this.Router.navigate(['folder/Inbox']);
+  /* calls addTraveler function from traveler service to add a new traveler to the database */
+  addTraveler(traveler) {
+    /* logging input parameters for new traveler for future reference */
+    console.log(traveler.name);
+    console.log(traveler.phone);
+    console.log(traveler.items);
+    console.log(traveler.needs);
+    /* send new traveler to addTraveler() in travelers service */
+    this.travelersService.addTraveler(traveler.name, traveler.phone, traveler.items, traveler.needs);
+    /* send user back to previous page */
+    this.goBack();
   }
 
 }
