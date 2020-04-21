@@ -33,7 +33,7 @@ export class AddTravelerPage implements OnInit {
   }
 
   goBack() {
-    this.Router.navigate(['/folder/MyPlan']);
+    this.Router.navigate(['my-trips']);
   }
 
   /* calls addTraveler function from traveler service to add a new traveler to the database */
