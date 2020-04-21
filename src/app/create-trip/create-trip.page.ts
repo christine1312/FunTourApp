@@ -34,7 +34,17 @@ export class CreateTripPage implements OnInit {
     this.Router.navigate(['my-trips']);
   }
 
-  addTrip() {
+  /* calls addTrip function from trip service to add a new trip to the database */
+  addTrip(trip) {
+    /* logging input parameters for new trip for future reference */
+    console.log(trip.name);
+    console.log(trip.budget);
+    console.log(trip.category);
+    console.log(trip.start);
+    console.log(trip.end);
+    /* send new trip to addTrip() in trips service */
+    this.tripsService.addTrip(trip.name, trip.budget, trip.category, trip.start, trip.end);
+    /* send user back to previous page */
     this.goBack();
   }
 
