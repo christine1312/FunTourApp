@@ -46,6 +46,10 @@ const routes: Routes = [
   {
     path: 'create-trip',
     loadChildren: () => import('./create-trip/create-trip.module').then( m => m.CreateTripPageModule)
+  },
+  {
+    path: 'trip-details',
+    loadChildren: () => import('./trip-details/trip-details.module').then( m => m.TripDetailsPageModule)
   }
 
 ];
