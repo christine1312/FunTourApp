@@ -19,16 +19,16 @@ export class LoginPage implements OnInit {
     this.router.navigate(['/folder/MyPlan'])
   }
 
-  signup() {
-    console.log("sign up")
-  }
-
   loginGoogle() {
     console.log("login google")
   }
 
   loginFacebook() {
     console.log("login facebook")
+  }
+
+  goToSignup() {
+    this.router.navigate(['signup']);
   }
 
 }
