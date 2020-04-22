@@ -19,23 +19,22 @@ export class TripsService {
   addTrip(name, budget, category, start, end) {
     console.log("addTrip()");
     /* getting the uid of the account that created the new traveler */
-    /*
     var uid = null;
     if (firebase.auth().currentUser != null) {
       uid = firebase.auth().currentUser.uid;
       console.log(uid, " :****** uid");
     }
-    else {*/
+    else {
       /* no one logged in */
-      /*console.log("no user logged in, no traveler created");
+      console.log("no user logged in, no traveler created");
       alert("You need to log in before you can add a new traveler to your trip!");
       return;
-    }*/
+    }
 
     /* add the new trip to the database */
     var db = firebase.firestore();
     db.collection("trips").add({
-      //'uid':uid,
+      'uid':uid,
       'name':name,
       'budget':budget,
       'category':category,
