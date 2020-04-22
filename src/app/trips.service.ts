@@ -52,4 +52,9 @@ export class TripsService {
       alert("Oops! Something went wrong!");
     });
   }
+
+  /* updates an existing trip in the database */
+  updateTrip(name, budget, category, start, end) {
+    console.log("updateTrip()");
+  }
 }
