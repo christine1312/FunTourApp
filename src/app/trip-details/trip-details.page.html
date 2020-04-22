@@ -24,6 +24,27 @@
     <ion-item-divider>
       <div style = "width: 100%; text-align: center;">{{ current_trip.end }}</div>
     </ion-item-divider>
+    <ion-item-divider>
+      <div style = "width: 100%; text-align: center;">Packing List</div>
+    </ion-item-divider>
+    <ion-item *ngFor = "let item of packing_list">
+      <ion-label>
+        {{ item.name }}
+        <h2>{{ item.category }}</h2>
+        <h2>How many: {{ item.quantity }}</h2>
+        <h2>Who's bringing: {{ item.who }}</h2>
+      </ion-label>
+    </ion-item>
+    <ion-item-divider>
+      <div style = "width: 100%; text-align: center;">Travelers</div>
+    </ion-item-divider>
+    <ion-item *ngFor = "let traveler of travelers">
+      <ion-label>
+        {{ traveler.name }}
+        <h2>{{ traveler.phone }}</h2>
+        <h2>Needs: {{ traveler.needs }}</h2>
+      </ion-label>
+    </ion-item>
   </ion-list>
   <ion-button expand = "full" color = "primary" (click) = "editTrip()">Edit Trip</ion-button>
 </ion-content>

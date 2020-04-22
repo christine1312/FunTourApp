@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class MyTripsPage implements OnInit {
 
   /* a collection of trips made by the user */
+  /* fake collection for testing */
   trips = [
     {"name":"Vacation to Sweden", "budget":"200", "category":"vacation", "start":"xx/xx/xx", "end":"xx/xx/xx"},
     {"name":"Vacation to Berlin", "budget":"200", "category":"vacation", "start":"xx/xx/xx", "end":"xx/xx/xx"},
