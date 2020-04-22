@@ -47,7 +47,7 @@ export class TripDetailsPage implements OnInit {
 
   /* sends user to the edit trip page */
   editTrip() {
-    this.Router.navigate(['edit-trip']);
+    this.Router.navigate(['edit-trip', this.current_trip]);
   }
 
 
