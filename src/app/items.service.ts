@@ -18,18 +18,17 @@ export class ItemsService {
   addItem(name, category, quantity, who) {
     console.log("addItem()");
     /* getting the uid of the account that created the new traveler */
-    /*
     var uid = null;
     if (firebase.auth().currentUser != null) {
       uid = firebase.auth().currentUser.uid;
       console.log(uid, " :****** uid");
     }
-    else {*/
+    else {
       /* no one logged in */
-      /*console.log("no user logged in, no traveler created");
+      console.log("no user logged in, no traveler created");
       alert("You need to log in before you can add a new traveler to your trip!");
       return;
-    }*/
+    }
 
     /* add the new item to the packing list */
     var db = firebase.firestore();
