@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 })
 export class AttractionsPage implements OnInit {
 
+  // NEXT: Show list of attractions
+
   constructor(private router: Router) { }
 
   ngOnInit() {

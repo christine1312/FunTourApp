@@ -50,7 +50,7 @@ export class AddAttractionPage implements OnInit {
       attraction.city,
       attraction.stateprovince,
       attraction.country)
-      this.router.navigate(['//attractions'])
+      this.router.navigate(['/attractions'])
   }
 
 }
