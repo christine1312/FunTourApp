@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as firebase from 'Firebase';
+import { TestBed } from '@angular/core/testing';
 
 @Component({
   selector: 'app-login',
@@ -11,8 +12,8 @@ export class LoginPage implements OnInit {
 
   imgfile="assets/tourists.jpg";
   db = firebase.firestore();
-  email;
-  password;
+  email = "hi@test.com";
+  password = "secret";
 
 
   constructor(private router: Router) { }

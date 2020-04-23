@@ -3,16 +3,21 @@ import * as firebase from 'Firebase';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-add-attraction',
-  templateUrl: './add-attraction.page.html',
-  styleUrls: ['./add-attraction.page.scss'],
+  selector: 'app-attractions',
+  templateUrl: './attractions.page.html',
+  styleUrls: ['./attractions.page.scss'],
 })
-export class AddAttractionPage implements OnInit {
+export class AttractionsPage implements OnInit {
 
   constructor(private router: Router) { }
 
   ngOnInit() {
   }
+
+  addAttraction() {
+    this.router.navigate(['/add-attraction']);
+  }
+
 
   logout() {
     firebase.auth().signOut().then(function() {
@@ -22,10 +27,6 @@ export class AddAttractionPage implements OnInit {
     });
     console.log("log out")
     this.router.navigate(['/login']);
-  }
-
-  addAttraction() {
-    console.log("Add attraction")
   }
 
 }

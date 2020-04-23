@@ -48,9 +48,9 @@ export class AppComponent implements OnInit {
       icon: 'search-circle'
     },
     {
-      title: 'Add attraction',
-      url: '/add-attraction',
-      icon: 'add'
+      title: 'Attractions',
+      url: '/attractions',
+      icon: 'golf'
     },
     {
       title: 'My Trips',
