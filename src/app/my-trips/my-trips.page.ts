@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TripsService } from '../trips.service';
 
 @Component({
   selector: 'app-my-trips',
@@ -9,18 +10,26 @@ import { Router } from '@angular/router';
 export class MyTripsPage implements OnInit {
 
   /* a collection of trips made by the user */
+  trips = [];
+  
   /* fake collection for testing */
-  trips = [
+  /*trips = [
     {"name":"Vacation to Sweden", "budget":"200", "category":"vacation", "start":"xx/xx/xx", "end":"xx/xx/xx"},
     {"name":"Vacation to Berlin", "budget":"200", "category":"vacation", "start":"xx/xx/xx", "end":"xx/xx/xx"},
     {"name":"Vacation to Paradise Falls","budget":"200", "category":"vacation", "start":"xx/xx/xx", "end":"xx/xx/xx"}
-  ];
+  ];*/
 
   constructor(
-    private Router: Router
-  ) { }
+    private Router: Router,
+    private tripsService: TripsService,
+  ) {
+      this.tripsService.getObservable().subscribe((data) => {
+        this.trips = this.tripsService.trips;
+      });
+  }
 
   ngOnInit() {
+    this.trips = this.tripsService.getTrips();
   }
 
   /* takes user to previous page */

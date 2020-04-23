@@ -1,12 +1,42 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'Firebase';
+import {Subject} from 'rxjs/Subject';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TripsService {
+  
+  /* collection of trips for a specific user */
+  trips = [];
 
-  constructor() { }
+  /* for passing information back to my-trips page */
+  private eventSubject = new Subject<any>();
+
+  constructor() {
+    /* check to see if anyone is signed in */
+    var self = this;
+    if (firebase.auth().currentUser != null) {
+      /* query database for trips matching current user's uid */
+      firebase.firestore().collection("trips").where("uid", "==", firebase.auth().currentUser.uid)
+      .onSnapshot(function(querySnapshot) {
+        console.log("trips list changed");
+        self.trips = [];
+        querySnapshot.forEach(function(doc) {
+          /* add each trip with matching uid to trips collection */
+          var trip = doc.data();
+          self.trips.push({uid:trip.uid, name:trip.name, budget:trip.budget, category:trip.category, start:trip.start, end:trip.end});
+        });
+        self.publishEvent({
+          foo: 'bar'
+        });
+      });
+    } else {
+      /* no one signed in */
+      console.log("No one signed in");
+      alert("Oops! You're not signed in! If you want to see your trips, you need to sign in first.");
+    }
+  }
 
   /*************************************************************************
    * addTrip() adds a new trip to the database
@@ -57,4 +87,19 @@ export class TripsService {
   updateTrip(name, budget, category, start, end) {
     console.log("updateTrip()");
   }
+
+  /* returns a collection of trips with uid equal to current user's uid */
+  getTrips() {
+    return this.trips;
+  }
+
+  publishEvent(data: any) {
+    this.eventSubject.next(data);
+  }
+
+  getObservable(): Subject<any> {
+    return this.eventSubject;
+  }
+
+
 }
