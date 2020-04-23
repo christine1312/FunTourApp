@@ -16,40 +16,52 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content padding>
 
-  <div id="addAttractionElements">    
+  <form [formGroup]="formGroup" (submit)="addAttraction(formGroup.value)">
 
-    <ion-label color="primary" position="floating">Attraction name</ion-label>
-      <ion-input id="attractionName" type="text" [(ngModel)]='attractionName'></ion-input>
+    <ion-item>
+      <ion-label color="primary" position="floating">Attraction name</ion-label>
+      <ion-input id="attractionName" type="text" formControlName="name"></ion-input>
+    </ion-item>
 
-    <ion-label color="primary" position="floating">Image url</ion-label>
-      <ion-input id="attractionImg" type="text" [(ngModel)]='attractionImg'></ion-input>
-
-    
+    <ion-item>
+      <ion-label color="primary" position="floating">Image url</ion-label>
+      <ion-input id="attractionImg" type="text" formControlName="img"></ion-input>
+    </ion-item>
+    <br>
+    <ion-item>
     <ion-label color="primary">Type of attraction</ion-label>
-      <ion-select placeholder="Select One">
+      <ion-select formControlName="type" placeholder="Select One">
         <ion-select-option value="restaurant">Restaurant</ion-select-option>
         <ion-select-option value="park">Park</ion-select-option>
         <ion-select-option value="other">Other</ion-select-option>
     </ion-select>
-    <br>
+  </ion-item>
 
-    <ion-label color="primary" position="floating">Description</ion-label>
-      <ion-input id="description" type="text" [(ngModel)]='description'></ion-input>
+    <ion-item>
+      <ion-label color="primary" position="floating">Description</ion-label>
+      <ion-input id="description" type="text" formControlName='description'></ion-input>
+    </ion-item>
 
-    <ion-label color="primary" position="floating">City</ion-label>
-      <ion-input id="city" type="text" [(ngModel)]='city'></ion-input>
-  
-    <ion-label color="primary" position="floating">State/Province</ion-label>
-      <ion-input id="state-province" type="text" [(ngModel)]='stateprovince'></ion-input>
+    <ion-item>
+      <ion-label color="primary" position="floating">City</ion-label>
+      <ion-input id="city" type="text" formControlName='city'></ion-input>
+    </ion-item>
 
-    <ion-label color="primary" position="floating">Country</ion-label>
-      <ion-input id="country" type="text" [(ngModel)]='country'></ion-input>
-  
-      <br>
-  
-    <ion-button class="submit-btn" expand="block" type="submit" (click)="addAttraction()">Add Attraction</ion-button>
-  </div>
+    <ion-item>
+      <ion-label color="primary" position="floating">State/Province</ion-label>
+      <ion-input id="state-province" type="text" formControlName='stateprovince'></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary" position="floating">Country</ion-label>
+      <ion-input id="country" type="text" formControlName='country'></ion-input>
+    </ion-item>
+
+    <br> 
+
+    <ion-button id="add-attraction-btn" class="submit-btn" expand="block" type="submit">Add Attraction</ion-button>
+  </form>
 
 </ion-content>

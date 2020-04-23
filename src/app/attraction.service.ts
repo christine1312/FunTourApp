@@ -9,6 +9,7 @@ export class AttractionService {
   constructor() { }
 
   addAttraction(name, img, type, description, city, stateprov, country) {
+    console.log(name + " " + img + " " + type + " " + description + " " + city + " " + stateprov + " " + country)
     console.log("addAttraction()");
     /* getting the uid of the account that created the new attraction */
     var uid = null;
@@ -46,6 +47,7 @@ export class AttractionService {
       console.error("Error adding document: " + error);
       alert("Oops! Something went wrong!");
     });
+    
   }
 
 
