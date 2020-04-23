@@ -10,6 +10,11 @@ import { Router } from '@angular/router';
 export class AttractionsPage implements OnInit {
 
   // NEXT: Show list of attractions
+  attractions = [
+    {"name":"Eiffel Tower", "city":"Paris"},
+    {"name":"Big Ben", "city":"London"},
+    {"name":"Swedish castle", "city":"Stockholm"},
+      ];
 
   constructor(private router: Router) { }
 
@@ -20,6 +25,9 @@ export class AttractionsPage implements OnInit {
     this.router.navigate(['/add-attraction']);
   }
 
+  goToAttraction(attraction) {
+    console.log("Go to: " + attraction.name);
+  }
 
   logout() {
     firebase.auth().signOut().then(function() {
