@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as firebase from 'Firebase';
 import { Router } from '@angular/router';
+import { AttractionService } from '../attraction.service';
 
 @Component({
   selector: 'app-add-attraction',
@@ -9,7 +10,8 @@ import { Router } from '@angular/router';
 })
 export class AddAttractionPage implements OnInit {
 
-  constructor(private router: Router) { }
+  constructor(private router: Router,
+    public attractionService:AttractionService) { }
 
   ngOnInit() {
   }
@@ -26,6 +28,7 @@ export class AddAttractionPage implements OnInit {
 
   addAttraction() {
     console.log("Add attraction")
+    //this.attractionService.addAttraction()
   }
 
 }
