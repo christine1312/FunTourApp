@@ -25,7 +25,8 @@ export class TripsService {
         querySnapshot.forEach(function(doc) {
           /* add each trip with matching uid to trips collection */
           var trip = doc.data();
-          self.trips.push({uid:trip.uid, name:trip.name, budget:trip.budget, category:trip.category, start:trip.start, end:trip.end});
+          var id = doc.id;
+          self.trips.push({id:id, uid:trip.uid, name:trip.name, budget:trip.budget, category:trip.category, start:trip.start, end:trip.end});
         });
         self.publishEvent({
           foo: 'bar'
@@ -84,8 +85,21 @@ export class TripsService {
   }
 
   /* updates an existing trip in the database */
-  updateTrip(name, budget, category, start, end) {
+  updateTrip(new_trip, trip_id) {
     console.log("updateTrip()");
+    /* new information to update a trip in the database with corresponding id */
+    console.log(new_trip);
+    console.log(trip_id);
+    /* update trip */
+    firebase.firestore().collection('trips').doc(trip_id).update({
+      name: new_trip.name,
+      budget: new_trip.budget,
+      category: new_trip.category,
+      start: new_trip.start,
+      end: new_trip.end
+    });
+    console.log("update complete");
+    alert("Your changes have been saved!");
   }
 
   /* returns a collection of trips with uid equal to current user's uid */
@@ -100,6 +114,5 @@ export class TripsService {
   getObservable(): Subject<any> {
     return this.eventSubject;
   }
-
-
+  
 }

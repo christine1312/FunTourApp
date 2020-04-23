@@ -71,6 +71,9 @@ export class EditTripPage implements OnInit {
     console.log(new_trip.start);
     console.log(new_trip.end);
     /* send edited trip to updateTrip in trips service */
-    this.tripsService.updateTrip(new_trip.name, new_trip.budget, new_trip.category, new_trip.start, new_trip.end);
+    console.log("Updating trip with id " + this.current_trip.id);
+    this.tripsService.updateTrip(new_trip, this.current_trip.id);
+    /* send user back to their trips list */
+    this.Router.navigate(['my-trips']);
    }
 }
