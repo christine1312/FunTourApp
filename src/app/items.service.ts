@@ -64,7 +64,7 @@ export class ItemsService {
     /* check to see if anyone is signed in */
     var self = this;
     if (firebase.auth().currentUser != null) {
-      /* query database for trips matching current user's uid */
+      /* query database for items matching current trip's id */
       console.log("Finding items with trip id " + trip_id);
       firebase.firestore().collection("items").where("trip id", "==", trip_id)
       .onSnapshot(function(querySnapshot) {
