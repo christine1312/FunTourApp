@@ -25,9 +25,9 @@ export class AttractionDetailsPage implements OnInit {
   }
 
 
-  editAttraction() {
+  editAttraction(attraction) {
     console.log("edit")
-    this.router.navigate(['/edit-attraction'])
+    this.router.navigate(['/edit-attraction', attraction])
   }
 
 }

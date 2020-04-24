@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { Router,ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit-attraction',
@@ -9,8 +10,11 @@ import { Validators, FormBuilder, FormControl, FormGroup } from '@angular/forms'
 export class EditAttractionPage implements OnInit {
 
   formGroup : FormGroup;
+  attraction : any;
 
-  constructor(public formBuilder: FormBuilder,) { }
+  constructor(public formBuilder: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute,) { }
 
   ngOnInit() {
     this.formGroup = this.formBuilder.group({
@@ -22,6 +26,17 @@ export class EditAttractionPage implements OnInit {
       stateprovince: new FormControl('', Validators.required),
       country: new FormControl('', Validators.required),
     });
+
+    this.route.params.subscribe(
+      param =>{
+        this.attraction = param;
+        console.log(this.attraction)
+      }
+    )
+  }
+
+  deleteAttraction() {
+    console.log("delete")
   }
 
 }
