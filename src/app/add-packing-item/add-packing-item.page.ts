@@ -13,6 +13,9 @@ export class AddPackingItemPage implements OnInit {
   /* new form group for getting input from the user */
   new_item_form: FormGroup;
 
+  /* trip the user wants to edit */
+  current_trip:any;
+
   /* src for briefcase image */
   packing_item_image = "assets/packing_item.jpg";
 

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { TravelersService } from '../travelers.service';
 
 @Component({
@@ -9,6 +9,9 @@ import { TravelersService } from '../travelers.service';
   styleUrls: ['./add-traveler.page.scss'],
 })
 export class AddTravelerPage implements OnInit {
+
+  /* the trip the user wants to edit */
+  current_trip:any;
 
   /* new form group for getting input from the user */
   new_traveler_form: FormGroup;
@@ -19,7 +22,8 @@ export class AddTravelerPage implements OnInit {
   constructor(
     public formBuilder: FormBuilder,
     public travelersService: TravelersService,
-    private Router: Router
+    private Router: Router,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
@@ -30,6 +34,13 @@ export class AddTravelerPage implements OnInit {
       items: new FormControl('', Validators.required),
       needs: new FormControl('', Validators.required)
     });
+    /* get the current trip from edit trip page  */
+    this.route.params.subscribe(
+      param => {
+        this.current_trip = param;
+        console.log(this.current_trip);
+      }
+    )
   }
 
   goBack() {
@@ -43,8 +54,10 @@ export class AddTravelerPage implements OnInit {
     console.log(traveler.phone);
     console.log(traveler.items);
     console.log(traveler.needs);
+    console.log("trip id: " + this.current_trip.id);
     /* send new traveler to addTraveler() in travelers service */
-    this.travelersService.addTraveler(traveler.name, traveler.phone, traveler.items, traveler.needs);
+    this.travelersService
+      .addTraveler(this.current_trip.id, traveler.name, traveler.phone, traveler.items, traveler.needs);
     /* send user back to previous page */
     this.goBack();
   }
