@@ -1,10 +1,17 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'Firebase';
+import {Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TravelersService {
+
+  /* list of travelers for a given trip */
+  travelers = [];
+
+  /* for passing information back to my-trips page */
+  private eventSubject = new Subject<any>();
   
   constructor() { }
 
@@ -52,6 +59,39 @@ export class TravelersService {
     });
   }
 
+  setTravelersList(trip_id) {
+    /* check to see if anyone is signed in */
+    var self = this;
+    if (firebase.auth().currentUser != null) {
+      /* query database for travelers matching current trip's uid */
+      console.log("Finding travelers with trip id " + trip_id);
+      firebase.firestore().collection("travelers").where("trip id", "==", trip_id)
+      .onSnapshot(function(querySnapshot) {
+        console.log("packing list changed");
+        self.travelers = [];
+        querySnapshot.forEach(function(doc) {
+          /* add each item with matching trip id to packing list */
+          var traveler = doc.data();
+          self.travelers.push({name:traveler.name, phone:traveler.phone, needs:traveler.needs});
+        });
+        self.publishEvent({
+          foo: 'bar'
+        });
+      });
+    } else {
+      /* no one signed in */
+      console.log("No one signed in");
+      alert("Oops! You're not signed in! If you want to see your trips, you need to sign in first.");
+      return;
+    }
+  }
 
+  publishEvent(data: any) {
+    this.eventSubject.next(data);
+  }
+
+  getObservable(): Subject<any> {
+    return this.eventSubject;
+  }
 
 }

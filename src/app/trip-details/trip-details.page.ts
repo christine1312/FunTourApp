@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ItemsService } from '../items.service';
+import { TravelersService } from '../travelers.service';
 
 @Component({
   selector: 'app-trip-details',
@@ -21,20 +22,25 @@ export class TripDetailsPage implements OnInit {
   ];*/
 
   /* list of travelers for a trip */
-  /* fake collection for testing */
+  travelers = [];
+  /* fake collection for testing
   travelers = [
     {"name":"Jeff", "phone":"xxx-xxx-xxx", "items":"bags of chips", "needs":"contacts"},
     {"name":"Karen", "phone":"xxx-xxx-xxx", "items":"bottles of water", "needs":"allergy medicine"},
     {"name":"Kevin", "phone":"xxx-xxx-xxx", "items":"first-aid kit", "needs":"glasses"}
-  ];
+  ];*/
   
   constructor(
     private Router: Router,
     private route: ActivatedRoute,
-    private itemService: ItemsService
+    private itemService: ItemsService,
+    private travelerService: TravelersService
   ) {
     this.itemService.getObservable().subscribe((data) => {
       this.packing_list = this.itemService.packing_list;
+    });
+    this.travelerService.getObservable().subscribe((data) => {
+      this.travelers = this.travelerService.travelers;
     });
   }
 
@@ -49,6 +55,9 @@ export class TripDetailsPage implements OnInit {
     /* set packing list */
     console.log("Getting packing list for trip with id " + this.current_trip.id);
     this.itemService.setPackingList(this.current_trip.id);
+    /* set travelers list */
+    console.log("getting travelers list for trip with id " + this.current_trip.id);
+    this.travelerService.setTravelersList(this.current_trip.id);
   }
 
   goBack() {
