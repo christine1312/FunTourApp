@@ -24,4 +24,10 @@ export class AttractionDetailsPage implements OnInit {
     )
   }
 
+
+  editAttraction() {
+    console.log("edit")
+    this.router.navigate(['/edit-attraction'])
+  }
+
 }

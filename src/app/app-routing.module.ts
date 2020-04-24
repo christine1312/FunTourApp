@@ -62,6 +62,10 @@ const routes: Routes = [
   {
     path: 'attraction-details',
     loadChildren: () => import('./attraction-details/attraction-details.module').then( m => m.AttractionDetailsPageModule)
+  },
+  {
+    path: 'edit-attraction',
+    loadChildren: () => import('./edit-attraction/edit-attraction.module').then( m => m.EditAttractionPageModule)
   }
 
 ];

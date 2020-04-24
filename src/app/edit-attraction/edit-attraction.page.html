@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Edit Attraction</ion-title>
+
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref = 'attractions'></ion-back-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form [formGroup]="formGroup" (submit)="addAttraction(formGroup.value)">
+
+    <ion-item>
+      <ion-label color="primary" position="floating">Attraction name</ion-label>
+      <ion-input id="attractionName" type="text" formControlName="name"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary" position="floating">Image url</ion-label>
+      <ion-input id="attractionImg" type="text" formControlName="img"></ion-input>
+    </ion-item>
+    <br>
+    <ion-item>
+    <ion-label color="primary">Type of attraction</ion-label>
+      <ion-select formControlName="type" placeholder="Select One">
+        <ion-select-option value="restaurant">Restaurant</ion-select-option>
+        <ion-select-option value="park">Park</ion-select-option>
+        <ion-select-option value="other">Other</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+    <ion-item>
+      <ion-label color="primary" position="floating">Description</ion-label>
+      <ion-input id="description" type="text" formControlName='description'></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary" position="floating">City</ion-label>
+      <ion-input id="city" type="text" formControlName='city'></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary" position="floating">State/Province</ion-label>
+      <ion-input id="state-province" type="text" formControlName='stateprovince'></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label color="primary" position="floating">Country</ion-label>
+      <ion-input id="country" type="text" formControlName='country'></ion-input>
+    </ion-item>
+
+    <br> 
+
+    <ion-button id="add-attraction-btn" class="submit-btn" expand="block" type="submit">Update Attraction</ion-button>
+  </form>
+
+</ion-content>
