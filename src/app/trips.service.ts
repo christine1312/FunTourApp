@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'Firebase';
-import {Subject} from 'rxjs/Subject';
+//import {Subject} from 'rxjs/Subject'; // This gave me an error don't know why - Elina
+import {Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
