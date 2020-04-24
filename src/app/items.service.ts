@@ -15,7 +15,7 @@ export class ItemsService {
    * quantity - how many - e.g. 2
    * who - name of the traveler who will bring it - e.g. John Doe
    *************************************************************************/
-  addItem(name, category, quantity, who) {
+  addItem(trip_id, name, category, quantity, who) {
     console.log("addItem()");
     /* getting the uid of the account that created the new traveler */
     var uid = null;
@@ -38,7 +38,7 @@ export class ItemsService {
       'category':category,
       'quantity':quantity,
       'who':who,
-      'trip id':"dummy"
+      'trip id':trip_id
     })
     .then(function(docRef) {
       /* successfully added to firebase */
