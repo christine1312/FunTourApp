@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
+import {Subject} from 'rxjs';
 import * as firebase from 'Firebase';
 
 @Injectable({
@@ -7,13 +8,14 @@ import * as firebase from 'Firebase';
 })
 export class AttractionService {
 
+  private eventSubject = new Subject<any>();
   db = firebase.firestore();
   attractions = [];
 
   constructor(private router: Router,) {
     var self = this;
 
-        this.db.collection("attractions")
+        this.db.collection("attractions") //self?
         .onSnapshot(function(querySnapshot) {
           self.attractions = [];
           querySnapshot.forEach(function(doc) {
@@ -29,10 +31,11 @@ export class AttractionService {
               country: attraction.country,
               id: doc.id})
           });
-          // self.events.publish('itemloaded',Date.now())
+          self.publishEvent({
+            foo: 'bar'
+          });
 
         });
-
    }
 
   addAttraction(name, img, type, description, city, stateorprovince, country) {
@@ -103,6 +106,24 @@ export class AttractionService {
     console.log(name, img, type, description, city, stateorprovince, country)
   }
 
+  
+// updateTrip(new_trip, trip_id) {
+//   console.log("updateTrip()");
+//   /* new information to update a trip in the database with corresponding id */
+//   console.log(new_trip);
+//   console.log(trip_id);
+//   /* update trip */
+//   firebase.firestore().collection('trips').doc(trip_id).update({
+//     name: new_trip.name,
+//     budget: new_trip.budget,
+//     category: new_trip.category,
+//     start: new_trip.start,
+//     end: new_trip.end
+//   });
+//   console.log("update complete");
+//   alert("Your changes have been saved!");
+// }
+
   deleteAttraction(id) {  
     var self = this;
     var db = firebase.firestore()
@@ -125,10 +146,17 @@ export class AttractionService {
     }
   }
 
-
+  
   public getAttractions() {
     return this.attractions;
   }
 
+  publishEvent(data: any) {
+    this.eventSubject.next(data);
+  }
+
+  getObservable(): Subject<any> {
+    return this.eventSubject;
+  }
 
 }

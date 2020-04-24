@@ -10,42 +10,19 @@ import { AttractionService } from '../attraction.service';
 })
 export class AttractionsPage implements OnInit {
 
-  // NEXT: Show list of attractions
-  /*attractions = [
-    {"name":"Eiffel Tower", 
-    "city":"Paris", 
-    "stateorprovince":"Seine", 
-    "country":"France",
-    "type":"Tower",
-    "img":"assets/eiffel.jpg",
-    "description":"Such a beautiful tower!"},
-    {"name":"Big Ben", 
-    "city":"London",
-    "stateorprovince":"Central", 
-    "country":"England",
-    "type":"Clock",
-    "img":"assets/bigben.jpg",
-    "description":"Ding dong"},
-    {"name":"Swedish castle", 
-    "city":"Stockholm",
-    "stateorprovince":"Uppland", 
-    "country":"Sweden",
-    "type":"Castle",
-    "img":"assets/castle.jpg",
-    "description":"Royalties"},
-      ];*/
-
       attractions = [];
 
   constructor(private router: Router,
     public attractionService:AttractionService) { 
-     this.attractions = attractionService.getAttractions();
 
-    console.log("HERE")
-    console.log(this.attractions)
+      this.attractionService.getObservable().subscribe((data) => {
+        this.attractions = this.attractionService.attractions;
+      });
+     console.log(this.attractions)
   }
 
   ngOnInit() {
+    this.attractions = this.attractionService.getAttractions();
   }
 
   addAttraction() {
