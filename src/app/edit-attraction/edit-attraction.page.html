@@ -7,7 +7,7 @@
     </ion-buttons>
 
     <ion-buttons slot="end">        
-      <ion-button (click)="deleteAttraction()">
+      <ion-button (click)="deleteAttraction(attraction)">
         <ion-icon slot="icon-only" name="trash"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -17,7 +17,7 @@
 
 <ion-content padding>
 
-  <form [formGroup]="formGroup" (submit)="addAttraction(formGroup.value)">
+  <form [formGroup]="formGroup" (submit)="editAttraction(formGroup.value)">
 
     <ion-item>
       <ion-label color="primary" position="floating">Attraction name</ion-label>

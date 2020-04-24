@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AttractionService } from '../attraction.service';
 import { Validators, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router,ActivatedRoute } from '@angular/router';
 
@@ -14,7 +15,8 @@ export class EditAttractionPage implements OnInit {
 
   constructor(public formBuilder: FormBuilder,
     private router: Router,
-    private route: ActivatedRoute,) { }
+    private route: ActivatedRoute,
+    private attractionService:AttractionService,) { }
 
   ngOnInit() {
     this.formGroup = this.formBuilder.group({
@@ -35,8 +37,32 @@ export class EditAttractionPage implements OnInit {
     )
   }
 
-  deleteAttraction() {
-    console.log("delete")
+  editAttraction(attraction) {
+    console.log("edit")
+    console.log(attraction)
+    console.log(this.attraction)
+
+    let name = attraction.name;
+    let img = attraction.img;
+    let type = attraction.type;
+    let description = attraction.description;
+    let city = attraction.city;
+    let stateprovince = attraction.stateprovince;
+    let country = attraction.country;
+
+    name == "" ? name = this.attraction.name : name = attraction.name;
+    img == "" ? img = this.attraction.img : img = attraction.img;
+    type == "" ? type = this.attraction.type : type = attraction.type;
+    description == "" ? description = this.attraction.description : type = attraction.description;
+    city == "" ? city = this.attraction.city : city = attraction.city;
+    stateprovince == "" ? stateprovince = this.attraction.stateorprovince : stateprovince = attraction.stateprovince;
+    country == "" ? country = this.attraction.country : country = attraction.country;
+    
+    this.attractionService.editAttraction(name, img, type, description, city, stateprovince, country);
+  }
+
+  deleteAttraction(attraction) {
+    this.attractionService.deleteAttraction(attraction.id)
   }
 
 }
