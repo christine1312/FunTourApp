@@ -41,7 +41,6 @@ export class AddAttractionPage implements OnInit {
   }
 
   addAttraction(attraction) {
-    console.log(attraction)
     this.attractionService.addAttraction(
       attraction.name, 
       attraction.img, 

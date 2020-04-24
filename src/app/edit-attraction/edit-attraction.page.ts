@@ -32,15 +32,11 @@ export class EditAttractionPage implements OnInit {
     this.route.params.subscribe(
       param =>{
         this.attraction = param;
-        console.log(this.attraction)
       }
     )
   }
 
-  editAttraction(attraction) {
-    console.log("edit")
-    console.log(attraction)
-    console.log(this.attraction)
+  editAttraction(attraction, attr) {
 
     let name = attraction.name;
     let img = attraction.img;
@@ -58,7 +54,9 @@ export class EditAttractionPage implements OnInit {
     stateprovince == "" ? stateprovince = this.attraction.stateorprovince : stateprovince = attraction.stateprovince;
     country == "" ? country = this.attraction.country : country = attraction.country;
     
-    this.attractionService.editAttraction(name, img, type, description, city, stateprovince, country);
+    this.attractionService.editAttraction(name, img, type, description, city, stateprovince, country, this.attraction.id);
+
+    this.router.navigate(['/attractions'])
   }
 
   deleteAttraction(attraction) {

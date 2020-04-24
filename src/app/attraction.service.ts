@@ -40,8 +40,6 @@ export class AttractionService {
 
   addAttraction(name, img, type, description, city, stateorprovince, country) {
     var self = this;
-    console.log(name + " " + img + " " + type + " " + description + " " + city + " " + stateorprovince + " " + country)
-    console.log("addAttraction()");
     /* getting the uid of the account that created the new attraction */
     var uid = null;
     if (firebase.auth().currentUser != null) {
@@ -69,7 +67,7 @@ export class AttractionService {
     .then(function(docRef) {
       /* successfully added to firebase */
       console.log("Document Written with ID: " + docRef.id);
-      alert(name + " has been added as an attraction");
+      // alert(name + " has been added as an attraction");
       self.addAttractionToLocalList();
      })
     .catch(function(error) {
@@ -98,38 +96,26 @@ export class AttractionService {
               id: doc.id})
           });
         })
-        console.log(self.attractions)
   }
 
-  editAttraction(name, img, type, description, city, stateorprovince, country) {
-    console.log("EDIT")
-    console.log(name, img, type, description, city, stateorprovince, country)
+  editAttraction(name, img, type, description, city, stateorprovince, country, id) {
+    firebase.firestore().collection('attractions').doc(id).update({
+      name: name,
+      img: img,
+      type: type,
+      description: description,
+      city: city,
+      stateorprovince: stateorprovince,
+      country: country,
+    });
+
   }
 
   
-// updateTrip(new_trip, trip_id) {
-//   console.log("updateTrip()");
-//   /* new information to update a trip in the database with corresponding id */
-//   console.log(new_trip);
-//   console.log(trip_id);
-//   /* update trip */
-//   firebase.firestore().collection('trips').doc(trip_id).update({
-//     name: new_trip.name,
-//     budget: new_trip.budget,
-//     category: new_trip.category,
-//     start: new_trip.start,
-//     end: new_trip.end
-//   });
-//   console.log("update complete");
-//   alert("Your changes have been saved!");
-// }
-
   deleteAttraction(id) {  
     var self = this;
     var db = firebase.firestore()
-    console.log(self.attractions)
     self.deleteAttractionLocally(id);
-    console.log(self.attractions)
       db.collection("attractions").doc(id).delete().then(function() {
         self.router.navigate(["/attractions"]);
       }).catch(function(error) {

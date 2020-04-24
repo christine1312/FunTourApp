@@ -18,7 +18,6 @@ export class AttractionsPage implements OnInit {
       this.attractionService.getObservable().subscribe((data) => {
         this.attractions = this.attractionService.attractions;
       });
-     console.log(this.attractions)
   }
 
   ngOnInit() {
@@ -30,7 +29,6 @@ export class AttractionsPage implements OnInit {
   }
 
   goToAttraction(attraction) {
-    console.log("Go to: " + attraction.name);
     this.router.navigate(['/attraction-details', attraction])
   }
 

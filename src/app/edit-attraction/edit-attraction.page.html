@@ -17,7 +17,7 @@
 
 <ion-content padding>
 
-  <form [formGroup]="formGroup" (submit)="editAttraction(formGroup.value)">
+  <form [formGroup]="formGroup" (submit)="editAttraction(formGroup.value, attraction)">
 
     <ion-item>
       <ion-label color="primary" position="floating">Attraction name</ion-label>
@@ -32,9 +32,9 @@
     <ion-item>
     <ion-label color="primary">Type of attraction</ion-label>
       <ion-select formControlName="type" placeholder="Select One" value={{attraction.type}}>
-        <ion-select-option value="restaurant">Restaurant</ion-select-option>
-        <ion-select-option value="park">Park</ion-select-option>
-        <ion-select-option value="other">Other</ion-select-option>
+        <ion-select-option value="Landmark">Landmark</ion-select-option>
+        <ion-select-option value="Museum">Museum</ion-select-option>
+        <ion-select-option value="Other">Other</ion-select-option>
     </ion-select>
   </ion-item>
 

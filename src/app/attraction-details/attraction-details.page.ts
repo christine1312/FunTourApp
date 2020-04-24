@@ -10,23 +10,28 @@ import { Router,ActivatedRoute } from '@angular/router';
 export class AttractionDetailsPage implements OnInit {
 
   attraction: any;
+  attractions: any;
 
   constructor(private attractionService:AttractionService,
     private router: Router,
-    private route: ActivatedRoute,) { }
+    private route: ActivatedRoute,
+    ) { 
+      this.attractionService.getObservable().subscribe((data) => {
+        this.attractions = this.attractionService.attractions;
+      });
+    }
 
   ngOnInit() {
+    this.attractions = this.attractionService.getAttractions();
     this.route.params.subscribe(
       param =>{
         this.attraction = param;
-        console.log(this.attraction)
       }
     )
   }
 
 
   editAttraction(attraction) {
-    console.log("edit")
     this.router.navigate(['/edit-attraction', attraction])
   }
 
