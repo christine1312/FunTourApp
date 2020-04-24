@@ -6,10 +6,36 @@ import * as firebase from 'Firebase';
 })
 export class AttractionService {
 
-  constructor() { }
+  db = firebase.firestore();
+  attractions = [];
 
-  addAttraction(name, img, type, description, city, stateprov, country) {
-    console.log(name + " " + img + " " + type + " " + description + " " + city + " " + stateprov + " " + country)
+  constructor() {
+    var self = this;
+
+        this.db.collection("attractions")
+        .onSnapshot(function(querySnapshot) {
+          self.attractions = [];
+          querySnapshot.forEach(function(doc) {
+            var attraction = doc.data();
+            self.attractions.push({
+              uid: attraction.uid,
+              name: attraction.name,
+              img: attraction.img,
+              type: attraction.type,
+              description: attraction.description,
+              city: attraction.city,
+              stateorprovince: attraction.stateorprovince,
+              country: attraction.country,
+              id: doc.id})
+          });
+          // self.events.publish('itemloaded',Date.now())
+
+        });
+
+   }
+
+  addAttraction(name, img, type, description, city, stateorprovince, country) {
+    console.log(name + " " + img + " " + type + " " + description + " " + city + " " + stateorprovince + " " + country)
     console.log("addAttraction()");
     /* getting the uid of the account that created the new attraction */
     var uid = null;
@@ -33,7 +59,7 @@ export class AttractionService {
       'type':type,
       'description':description,
       'city':city,
-      'stateprov':stateprov,
+      'stateorprovince':stateorprovince,
       'country':country,
       'attraction id':"dummy"
     })
@@ -48,6 +74,10 @@ export class AttractionService {
       alert("Oops! Something went wrong!");
     });
     
+  }
+
+  public getAttractions() {
+    return this.attractions;
   }
 
 

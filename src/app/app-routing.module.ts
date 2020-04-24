@@ -58,6 +58,10 @@ const routes: Routes = [
   {
     path: 'attractions',
     loadChildren: () => import('./attractions/attractions.module').then( m => m.AttractionsPageModule)
+  },
+  {
+    path: 'attraction-details',
+    loadChildren: () => import('./attraction-details/attraction-details.module').then( m => m.AttractionDetailsPageModule)
   }
 
 ];
