@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ItemsService } from '../items.service';
 
 @Component({
   selector: 'app-trip-details',
@@ -11,12 +12,13 @@ export class TripDetailsPage implements OnInit {
   current_trip:any;
 
   /* packing list for a given trip */
-  /* fake collection for testing */
+  packing_list = [];
+  /* fake collection for testing
   packing_list = [
     {"name":"bags of chips", "category":"food", "quantity":"3", "who":"Jeff"},
     {"name":"bottles of water", "category":"drink", "quantity":"10", "who":"Karen"},
     {"name":"first aid kit", "category":"first-aid", "quantity":"1", "who":"Kevin"}
-  ];
+  ];*/
 
   /* list of travelers for a trip */
   /* fake collection for testing */
@@ -28,8 +30,13 @@ export class TripDetailsPage implements OnInit {
   
   constructor(
     private Router: Router,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    private itemService: ItemsService
+  ) {
+    this.itemService.getObservable().subscribe((data) => {
+      this.packing_list = this.itemService.packing_list;
+    });
+  }
 
   ngOnInit() {
     /* getting the trip selected by the user */
@@ -39,6 +46,9 @@ export class TripDetailsPage implements OnInit {
         console.log(this.current_trip);
       }
     )
+    /* set packing list */
+    console.log("Getting packing list for trip with id " + this.current_trip.id);
+    this.itemService.setPackingList(this.current_trip.id);
   }
 
   goBack() {

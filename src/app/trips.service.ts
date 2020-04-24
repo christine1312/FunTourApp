@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'Firebase';
-//import {Subject} from 'rxjs/Subject'; // This gave me an error don't know why - Elina
 import {Subject} from 'rxjs';
 
 @Injectable({
@@ -103,9 +102,31 @@ export class TripsService {
     alert("Your changes have been saved!");
   }
 
-  /* returns a collection of trips with uid equal to current user's uid */
-  getTrips() {
-    return this.trips;
+  /* sets trip list to a collection of trips with uid equal to current user's uid */
+  setTrips() {
+    /* check to see if anyone is signed in */
+    var self = this;
+    if (firebase.auth().currentUser != null) {
+      /* query database for trips matching current user's uid */
+      firebase.firestore().collection("trips").where("uid", "==", firebase.auth().currentUser.uid)
+      .onSnapshot(function(querySnapshot) {
+        console.log("trips list changed");
+        self.trips = [];
+        querySnapshot.forEach(function(doc) {
+          /* add each trip with matching uid to trips collection */
+          var trip = doc.data();
+          var id = doc.id;
+          self.trips.push({id:id, uid:trip.uid, name:trip.name, budget:trip.budget, category:trip.category, start:trip.start, end:trip.end});
+        });
+        self.publishEvent({
+          foo: 'bar'
+        });
+      });
+    } else {
+      /* no one signed in */
+      console.log("No one signed in");
+      alert("Oops! You're not signed in! If you want to see your trips, you need to sign in first.");
+    }
   }
 
   publishEvent(data: any) {
@@ -115,5 +136,4 @@ export class TripsService {
   getObservable(): Subject<any> {
     return this.eventSubject;
   }
-  
 }
