@@ -29,7 +29,7 @@ export class MyTripsPage implements OnInit {
   }
 
   ngOnInit() {
-    this.trips = this.tripsService.getTrips();
+    this.tripsService.setTrips();
   }
 
   /* takes user to previous page */
