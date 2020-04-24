@@ -46,7 +46,7 @@ export class EditTripPage implements OnInit {
       }
     )
   }
-
+  
   /* sends user back to previous trip details page */
   goBack() {
     this.Router.navigate(['trip-details', this.current_trip]);
@@ -54,12 +54,12 @@ export class EditTripPage implements OnInit {
 
   /* sends user to add item page */
   addItem() {
-    this.Router.navigate(['add-packing-item']);
+    this.Router.navigate(['add-packing-item', this.current_trip]);
   }
 
   /* sends user to add traveler page */
   addTraveler() {
-    this.Router.navigate(['add-traveler']);
+    this.Router.navigate(['add-traveler', this.current_trip]);
   }
 
    /* calls updateTrip function from trips service to push updated values to the database */

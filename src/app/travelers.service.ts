@@ -15,7 +15,7 @@ export class TravelersService {
    * items - all of the items the traveler will bring - e.g. chips
    * needs - any necessary items the traveler needs - e.g. contacts
    *************************************************************************/
-  addTraveler(name, phone, items, needs) {
+  addTraveler(trip_id, name, phone, items, needs) {
     console.log("addTraveler()");
     /* getting the uid of the account that created the new traveler */
     var uid = null;
@@ -38,7 +38,7 @@ export class TravelersService {
       'phone':phone,
       'items':items,
       'needs':needs,
-      'trip id':"dummy"
+      'trip id':trip_id
     })
     .then(function(docRef) {
       /* successfully added to firebase */
