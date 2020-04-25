@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'Firebase';
 import {Subject} from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,9 @@ export class TripsService {
   /* for passing information back to my-trips page */
   private eventSubject = new Subject<any>();
 
-  constructor() {
+  constructor(
+    private Router: Router
+  ) {
     /* check to see if anyone is signed in */
     var self = this;
     if (firebase.auth().currentUser != null) {
@@ -136,4 +139,52 @@ export class TripsService {
   getObservable(): Subject<any> {
     return this.eventSubject;
   }
+
+  /* deletes the trip and all associated packing items and travelers from the database */
+  deleteTrip(trip_id) {
+    var self = this;
+    var db = firebase.firestore();
+
+    /* delete the trip from the database */
+    db.collection("trips").doc(trip_id).delete().then(function() {
+      console.log("Trip successfully deleted");
+      console.log("Trip deleted: " + trip_id);
+      self.Router.navigate(['my-trips']);
+    }).catch(function(error) {
+      console.error("Error removing document: " + error);
+    });
+
+    /* delete all packing items associated with the trip */
+    console.log("Deleting all items with trip id " + trip_id);
+    db.collection("items").where("trip id", "==", trip_id)
+    .onSnapshot(function(querySnapshot) {
+      /* found all items associated with deleted trip */
+      querySnapshot.forEach(function(doc) {
+        /* delete the item */
+        db.collection("items").doc(doc.id).delete().then(function() {
+          console.log("Item successfully removed");
+        }).catch(function(error) {
+          console.error("Error removing document: " + error);
+        });
+      });
+    });
+
+    /* delete all travelers associated with the trip */
+    console.log("Deleting all travelers with trip id " + trip_id);
+    db.collection("travelers").where("trip id", "==", trip_id)
+    .onSnapshot(function(querySnapshot) {
+      /* found all items associated with deleted trip */
+      querySnapshot.forEach(function(doc) {
+        /* delete the item */
+        db.collection("travelers").doc(doc.id).delete().then(function() {
+          console.log("Traveler successfully removed");
+        }).catch(function(error) {
+          console.error("Error removing document: " + error);
+        });
+      });
+    });    
+
+  }
+
+
 }
