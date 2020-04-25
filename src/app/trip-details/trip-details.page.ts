@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ItemsService } from '../items.service';
 import { TravelersService } from '../travelers.service';
 import { TripsService } from '../trips.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-trip-details',
@@ -36,7 +37,8 @@ export class TripDetailsPage implements OnInit {
     private route: ActivatedRoute,
     private itemService: ItemsService,
     private travelerService: TravelersService,
-    private tripsService: TripsService
+    private tripsService: TripsService,
+    public alertController: AlertController
   ) {
     this.itemService.getObservable().subscribe((data) => {
       this.packing_list = this.itemService.packing_list;
@@ -71,10 +73,31 @@ export class TripDetailsPage implements OnInit {
     this.Router.navigate(['edit-trip', this.current_trip]);
   }
 
-  /* deletes the current trip */
-  deleteTrip() {
-    this.tripsService.deleteTrip(this.current_trip.id);
-    this.Router.navigate(['my-trips']);
-  }
+  /* presents alert before deleting trip */
+  /* if users clicks yes, trip is deleted */
+  async deleteTrip() {
+    var self = this;
+    const alert = await this.alertController.create({
+      header: 'Warning!',
+      message: 'Deleting your trip will delete its packing list and travelers list too. Are you sure you want to delete your trip?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => {
+            console.log("User canceled delete. Nothing deleted.");
+          }
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            self.tripsService.deleteTrip(this.current_trip.id);
+            self.Router.navigate(['my-trips']);
+          }
+        }
+      ]
+    });
 
+    await alert.present();
+  }
 }
