@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ItemsService } from '../items.service';
 import { TravelersService } from '../travelers.service';
+import { TripsService } from '../trips.service';
 
 @Component({
   selector: 'app-trip-details',
@@ -34,7 +35,8 @@ export class TripDetailsPage implements OnInit {
     private Router: Router,
     private route: ActivatedRoute,
     private itemService: ItemsService,
-    private travelerService: TravelersService
+    private travelerService: TravelersService,
+    private tripsService: TripsService
   ) {
     this.itemService.getObservable().subscribe((data) => {
       this.packing_list = this.itemService.packing_list;
@@ -69,6 +71,10 @@ export class TripDetailsPage implements OnInit {
     this.Router.navigate(['edit-trip', this.current_trip]);
   }
 
-
+  /* deletes the current trip */
+  deleteTrip() {
+    this.tripsService.deleteTrip(this.current_trip.id);
+    this.Router.navigate(['my-trips']);
+  }
 
 }
