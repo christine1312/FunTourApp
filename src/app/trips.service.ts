@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import * as firebase from 'Firebase';
 import {Subject} from 'rxjs';
 import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,8 @@ export class TripsService {
   private eventSubject = new Subject<any>();
 
   constructor(
-    private Router: Router
+    private Router: Router,
+    public alertController: AlertController
   ) {
     /* check to see if anyone is signed in */
     var self = this;
@@ -51,6 +53,7 @@ export class TripsService {
    * end - day that the trip ends - e.g. xx/xx/xx
    *************************************************************************/
   addTrip(name, budget, category, start, end) {
+    var self = this;
     console.log("addTrip()");
     /* getting the uid of the account that created the new traveler */
     var uid = null;
@@ -61,7 +64,7 @@ export class TripsService {
     else {
       /* no one logged in */
       console.log("no user logged in, no traveler created");
-      alert("You need to log in before you can add a new traveler to your trip!");
+      self.presentAlert("You need to log in before you can add a new traveler to your trip!");
       return;
     }
 
@@ -78,12 +81,12 @@ export class TripsService {
     .then(function(docRef) {
       /* successfully added to firebase */
       console.log("Document Written with ID: " + docRef.id);
-      alert("Your new trip has been saved!");
+      self.presentAlert("Your new trip has been saved!");
     })
     .catch(function(error) {
       /* an error occurred */
       console.error("Error adding document: " + error);
-      alert("Oops! Something went wrong!");
+      self.presentAlert("Oops! Something went wrong!");
     });
   }
 
@@ -102,7 +105,7 @@ export class TripsService {
       end: new_trip.end
     });
     console.log("update complete");
-    alert("Your changes have been saved!");
+    this.presentAlert("Your changes have been saved!");
   }
 
   /* sets trip list to a collection of trips with uid equal to current user's uid */
@@ -128,7 +131,7 @@ export class TripsService {
     } else {
       /* no one signed in */
       console.log("No one signed in");
-      alert("Oops! You're not signed in! If you want to see your trips, you need to sign in first.");
+      self.presentAlert("Before you can see your trips, you need to sign in first");
     }
   }
 
@@ -183,7 +186,16 @@ export class TripsService {
         });
       });
     });    
+  }
 
+  /* presents an alert with message m */
+  async presentAlert(m:string) {
+    const alert = await this.alertController.create({
+      message: m,
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 
 

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as firebase from 'Firebase';
 import {Subject} from 'rxjs';
+import { AlertController } from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,9 @@ export class TravelersService {
   /* for passing information back to my-trips page */
   private eventSubject = new Subject<any>();
   
-  constructor() { }
+  constructor(
+    public alertController: AlertController
+  ) { }
 
   /*************************************************************************
    * addTraveler() adds a new traveler to a given trip
@@ -24,6 +27,7 @@ export class TravelersService {
    *************************************************************************/
   addTraveler(trip_id, name, phone, items, needs) {
     console.log("addTraveler()");
+    var self = this;
     /* getting the uid of the account that created the new traveler */
     var uid = null;
     if (firebase.auth().currentUser != null) {
@@ -33,7 +37,6 @@ export class TravelersService {
     else {
       /* no one logged in */
       console.log("no user logged in, no traveler created");
-      alert("You need to log in before you can add a new traveler to your trip!");
       return;
     }
 
@@ -50,12 +53,12 @@ export class TravelersService {
     .then(function(docRef) {
       /* successfully added to firebase */
       console.log("Document Written with ID: " + docRef.id);
-      alert(name + " has been added to your trip!");
+      self.presentAlert(name + " has been added to your trip!");
     })
     .catch(function(error) {
       /* an error occurred */
       console.error("Error adding document: " + error);
-      alert("Oops! Something went wrong!");
+      self.presentAlert("Oops! Something went wrong!");
     });
   }
 
@@ -81,7 +84,6 @@ export class TravelersService {
     } else {
       /* no one signed in */
       console.log("No one signed in");
-      alert("Oops! You're not signed in! If you want to see your trips, you need to sign in first.");
       return;
     }
   }
@@ -92,6 +94,16 @@ export class TravelersService {
 
   getObservable(): Subject<any> {
     return this.eventSubject;
+  }
+
+  /* presents an alert with message m */
+  async presentAlert(m:string) {
+    const alert = await this.alertController.create({
+      message: m,
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 
 }
