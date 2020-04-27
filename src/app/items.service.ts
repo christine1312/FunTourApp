@@ -76,7 +76,8 @@ export class ItemsService {
         querySnapshot.forEach(function(doc) {
           /* add each item with matching trip id to packing list */
           var item = doc.data();
-          self.packing_list.push({name:item.name, category:item.category, quantity:item.quantity, who:item.who});
+          var id = doc.id;
+          self.packing_list.push({id:id, name:item.name, category:item.category, quantity:item.quantity, who:item.who});
         });
         self.publishEvent({
           foo: 'bar'
@@ -87,6 +88,20 @@ export class ItemsService {
       console.log("No one signed in");
       return;
     }
+  }
+
+  /* deletes an item with a given id */
+  deleteItem(item_id) {
+    console.log("Deleting item with id " + item_id);
+    var self = this;
+    var db = firebase.firestore();
+
+    /* delete the item from the database */
+    db.collection("items").doc(item_id).delete().then(function() {
+      console.log("Successfully deleted item with id " + item_id);
+    }).catch(function(error) {
+      console.error("Error removing document: " + error);
+    });
   }
 
   publishEvent(data: any) {
