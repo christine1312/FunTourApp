@@ -35,7 +35,8 @@ const routes: Routes = [
   {
     path: 'add-attraction',
     loadChildren: () => import('./add-attraction/add-attraction.module').then( m => m.AddAttractionPageModule)
-  },  {
+  },
+  {
     path: 'signup',
     loadChildren: () => import('./signup/signup.module').then( m => m.SignupPageModule)
   },
@@ -54,6 +55,10 @@ const routes: Routes = [
   {
     path: 'edit-trip',
     loadChildren: () => import('./edit-trip/edit-trip.module').then( m => m.EditTripPageModule)
+  },
+  {
+    path: 'view-map',
+    loadChildren: () => import('./view-map/view-map.module').then( m => m.ViewMapPageModule)
   },
   {
     path: 'attractions',
