@@ -44,6 +44,11 @@
       <div style = "width: 100%; text-align: center;">Travelers</div>
     </ion-item-divider>
     <ion-item *ngFor = "let traveler of travelers">
+      <ion-buttons slot = "end">
+        <ion-button (click) = "deleteTraveler(traveler.id)">
+          <ion-icon slot = "icon-only" name = "close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
       <ion-label>
         {{ traveler.name }}
         <h2>{{ traveler.phone }}</h2>
