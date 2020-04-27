@@ -35,7 +35,8 @@ const routes: Routes = [
   {
     path: 'add-attraction',
     loadChildren: () => import('./add-attraction/add-attraction.module').then( m => m.AddAttractionPageModule)
-  },  {
+  },
+  {
     path: 'signup',
     loadChildren: () => import('./signup/signup.module').then( m => m.SignupPageModule)
   },
@@ -58,6 +59,18 @@ const routes: Routes = [
   {
     path: 'view-map',
     loadChildren: () => import('./view-map/view-map.module').then( m => m.ViewMapPageModule)
+  },
+  {
+    path: 'attractions',
+    loadChildren: () => import('./attractions/attractions.module').then( m => m.AttractionsPageModule)
+  },
+  {
+    path: 'attraction-details',
+    loadChildren: () => import('./attraction-details/attraction-details.module').then( m => m.AttractionDetailsPageModule)
+  },
+  {
+    path: 'edit-attraction',
+    loadChildren: () => import('./edit-attraction/edit-attraction.module').then( m => m.EditAttractionPageModule)
   }
 
 ];

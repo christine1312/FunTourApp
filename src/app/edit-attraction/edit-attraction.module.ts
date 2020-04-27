@@ -4,9 +4,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AddAttractionPageRoutingModule } from './add-attraction-routing.module';
+import { EditAttractionPageRoutingModule } from './edit-attraction-routing.module';
 
-import { AddAttractionPage } from './add-attraction.page';
+import { EditAttractionPage } from './edit-attraction.page';
 
 @NgModule({
   imports: [
@@ -14,8 +14,8 @@ import { AddAttractionPage } from './add-attraction.page';
     FormsModule,
     IonicModule,
     ReactiveFormsModule,
-    AddAttractionPageRoutingModule
+    EditAttractionPageRoutingModule
   ],
-  declarations: [AddAttractionPage]
+  declarations: [EditAttractionPage]
 })
-export class AddAttractionPageModule {}
+export class EditAttractionPageModule {}

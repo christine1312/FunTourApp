@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Attraction Details</ion-title>
+
+    <ion-buttons slot = "start">
+      <ion-back-button defaultHref = '/attractions'></ion-back-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">        
+      <ion-button (click)="editAttraction(attraction)">
+        <ion-icon slot="icon-only" name="pencil"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <div class="attraction-details">
+  <h1>{{ attraction.name }} </h1>
+
+  <ion-img [src]="attraction.img"></ion-img>
+
+  <p>{{ "Location: " + attraction.city + ", " + attraction.stateorprovince + ", " + attraction.country }}</p>
+  <p>{{ "Type of attraction: " + attraction.type }}</p>
+  <p>{{ "Description: " + attraction.description }}</p>
+
+
+</div>
+</ion-content>

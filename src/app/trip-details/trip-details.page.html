@@ -28,6 +28,11 @@
       <div style = "width: 100%; text-align: center;">Packing List</div>
     </ion-item-divider>
     <ion-item *ngFor = "let item of packing_list">
+      <ion-buttons slot = "end">
+        <ion-button (click) = "deleteItem(item.id)">
+          <ion-icon slot = "icon-only" name = "close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
       <ion-label>
         {{ item.name }}
         <h2>{{ item.category }}</h2>
@@ -39,6 +44,11 @@
       <div style = "width: 100%; text-align: center;">Travelers</div>
     </ion-item-divider>
     <ion-item *ngFor = "let traveler of travelers">
+      <ion-buttons slot = "end">
+        <ion-button (click) = "deleteTraveler(traveler.id)">
+          <ion-icon slot = "icon-only" name = "close"></ion-icon>
+        </ion-button>
+      </ion-buttons>
       <ion-label>
         {{ traveler.name }}
         <h2>{{ traveler.phone }}</h2>
@@ -47,4 +57,5 @@
     </ion-item>
   </ion-list>
   <ion-button expand = "block" color = "primary" (click) = "editTrip()">Edit Trip</ion-button>
+  <ion-button expand = "block" color = "primary" (click) = "deleteTrip()">Delete Trip</ion-button>
 </ion-content>
