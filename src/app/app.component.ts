@@ -34,7 +34,7 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'Map',
-      url: '/folder/Map',
+      url: '/view-map',
       icon: 'map'
     },
     {
