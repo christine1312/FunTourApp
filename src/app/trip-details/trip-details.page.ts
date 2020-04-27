@@ -100,4 +100,37 @@ export class TripDetailsPage implements OnInit {
 
     await alert.present();
   }
+
+  /* presents an alert before deleting the item */
+  /* if users clicks yes, trip is deleted */
+  async deleteItem(item_id) {
+    var self = this;
+    console.log("deleteItem()");
+
+    const alert = await this.alertController.create({
+      header: 'Warning!',
+      message: 'Are you sure you want to delete this item from your packing list?',
+      buttons: [
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => {
+            console.log("User canceled delete. Nothing deleted.");
+          }
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            // self.tripsService.deleteTrip(this.current_trip.id);'
+            // self.Router.navigate(['my-trips']);
+            console.log("User wants to delete item with id " + item_id);
+            self.itemService.deleteItem(item_id);
+            self.itemService.setPackingList(self.current_trip.id);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
 }
