@@ -27,25 +27,9 @@ export class AppComponent implements OnInit {
   public selectedIndex = 0;
   public appPages = [
     {
-      title: 'My plan',
-      url: '/folder/MyPlan',
-      icon: 'earth'
-      //icon: 'reader' // another icon option
-    },
-    {
-      title: 'Map',
-      url: '/view-map',
-      icon: 'map'
-    },
-    {
-      title: 'Search by city',
-      url: '/search-by-city',
-      icon: 'search'
-    },
-    {
-      title: 'Search with Google',
-      url: '/folder/SearchWithGoogle',
-      icon: 'search-circle'
+      title: 'My Trips',
+      url: 'my-trips',
+      icon: 'briefcase'
     },
     {
       title: 'Attractions',
@@ -53,10 +37,10 @@ export class AppComponent implements OnInit {
       icon: 'golf'
     },
     {
-      title: 'My Trips',
-      url: 'my-trips',
-      icon: 'briefcase'
-    }
+      title: 'Map',
+      url: '/view-map',
+      icon: 'map'
+    },    
   ];
   //public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 

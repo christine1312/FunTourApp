@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TripsService } from '../trips.service';
+import * as firebase from 'Firebase';
 
 @Component({
   selector: 'app-my-trips',
@@ -46,5 +47,15 @@ export class MyTripsPage implements OnInit {
   goToTrip(trip) {
     console.log(trip);
     this.Router.navigate(['trip-details', trip]);
+  }
+
+  logout() {
+    firebase.auth().signOut().then(function() {
+
+    }).catch(function(error){
+      console.log("logout error: " + error)
+    });
+    console.log("log out")
+    this.Router.navigate(['/login']);
   }
 }

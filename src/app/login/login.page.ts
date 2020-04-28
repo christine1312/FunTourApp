@@ -38,7 +38,7 @@ export class LoginPage implements OnInit {
     ).then(function(result){
       console.log(result)
       if(result != undefined)
-        self.router.navigate(['/folder/MyPlan'])
+        self.router.navigate(['/my-trips'])
       })
   }
 
