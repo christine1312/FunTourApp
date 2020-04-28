@@ -42,7 +42,6 @@ export class AppComponent implements OnInit {
       icon: 'map'
     },    
   ];
-  //public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
   constructor(
     private platform: Platform,
