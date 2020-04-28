@@ -40,7 +40,6 @@ export class TripsService {
     } else {
       /* no one signed in */
       console.log("No one signed in");
-      alert("Oops! You're not signed in! If you want to see your trips, you need to sign in first.");
     }
   }
 
