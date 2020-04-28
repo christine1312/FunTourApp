@@ -50,7 +50,7 @@ export class SignupPage implements OnInit {
 				console.log('usertype written with id: ', docRef.id);
 			})
       console.log('Account successfully created');
-      self.router.navigate(['add-attraction']);
+      self.router.navigate(['login']);
 	});
   }
 
