@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import * as firebase from 'Firebase';
 import { TestBed } from '@angular/core/testing';
+import { TripsService } from '../trips.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginPage implements OnInit {
   password = "secret";
 
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private tripsService: TripsService) { }
 
   ngOnInit() {
   }
@@ -37,8 +38,10 @@ export class LoginPage implements OnInit {
     }
     ).then(function(result){
       console.log(result)
-      if(result != undefined)
-        self.router.navigate(['/my-trips'])
+      if(result != undefined) {
+        self.tripsService.setTrips();
+        self.router.navigate(['/my-trips']);
+      }
       })
   }
 
@@ -53,7 +56,8 @@ export class LoginPage implements OnInit {
       var token = result.credential.providerId;
       //The signed-in user info
       var user = result.user;
-      console.log("google login succeeded")
+      console.log("google login succeeded");
+      self.tripsService.setTrips();
       self.router.navigate(["/my-trips"]);
     });
   }

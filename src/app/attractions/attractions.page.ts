@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AttractionService } from '../attraction.service';
+import { TripsService } from '../trips.service';
 
 @Component({
   selector: 'app-attractions',
@@ -15,7 +16,7 @@ export class AttractionsPage implements OnInit {
       listTitle = "All attractions";
 
   constructor(private router: Router,
-    public attractionService:AttractionService) { 
+    public attractionService:AttractionService, private tripsService: TripsService) { 
 
       this.attractionService.getObservable().subscribe((data) => {
         this.allAttractions = this.attractionService.attractions;
@@ -63,7 +64,8 @@ export class AttractionsPage implements OnInit {
   }
 
   logout() {
-    this.attractionService.logout()
+    this.tripsService.resetTrips();
+    this.attractionService.logout();
   }
 
 }
