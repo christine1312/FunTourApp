@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AttractionService } from '../attraction.service';
 import { Router,ActivatedRoute } from '@angular/router';
+import * as firebase from 'Firebase';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-attraction-details',
@@ -15,6 +17,7 @@ export class AttractionDetailsPage implements OnInit {
   constructor(private attractionService:AttractionService,
     private router: Router,
     private route: ActivatedRoute,
+    public alertController: AlertController
     ) { 
       this.attractionService.getObservable().subscribe((data) => {
         this.attractions = this.attractionService.attractions;
@@ -32,7 +35,29 @@ export class AttractionDetailsPage implements OnInit {
 
 
   editAttraction(attraction) {
-    this.router.navigate(['/edit-attraction', attraction])
+    if(attraction.uid !== firebase.auth().currentUser.uid) {
+      this.presentAlert()
+    } else {
+      this.router.navigate(['/edit-attraction', attraction])
+    }
+  }
+
+  async presentAlert() {
+    const alert = await this.alertController.create({
+      header: 'Not allowed',
+      message: 'The attraction can only be edited by the user who created it.',
+      buttons: [
+        {
+          text: 'Ok',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+          }
+        }, 
+      ]
+    });
+  
+    await alert.present();
   }
 
 }
