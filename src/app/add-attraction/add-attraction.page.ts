@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Validators, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { AttractionService } from '../attraction.service';
+import { TripsService } from '../trips.service';
 
 @Component({
   selector: 'app-add-attraction',
@@ -15,7 +16,8 @@ export class AddAttractionPage implements OnInit {
 
   constructor(private router: Router,
     public formBuilder: FormBuilder,
-    public attractionService:AttractionService) { }
+    public attractionService:AttractionService,
+    private tripsService: TripsService) { }
 
   ngOnInit() {
     this.formGroup = this.formBuilder.group({
@@ -30,7 +32,8 @@ export class AddAttractionPage implements OnInit {
   }
 
   logout() {
-    this.attractionService.logout()
+    this.tripsService.resetTrips();
+    this.attractionService.logout();
   }
 
   addAttraction(attraction) {

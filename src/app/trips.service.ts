@@ -218,5 +218,8 @@ export class TripsService {
   /* resets trips for logouts */
   resetTrips() {
     this.trips = [];
+    this.publishEvent({
+      foo: 'bar'
+    });
   }
 }

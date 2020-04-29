@@ -3,6 +3,7 @@ import { AttractionService } from '../attraction.service';
 import { Router,ActivatedRoute } from '@angular/router';
 import * as firebase from 'Firebase';
 import { AlertController } from '@ionic/angular';
+import { TripsService } from '../trips.service';
 
 @Component({
   selector: 'app-attraction-details',
@@ -17,7 +18,8 @@ export class AttractionDetailsPage implements OnInit {
   constructor(private attractionService:AttractionService,
     private router: Router,
     private route: ActivatedRoute,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private tripsService: TripsService
     ) { 
       this.attractionService.getObservable().subscribe((data) => {
         this.attractions = this.attractionService.attractions;
@@ -61,7 +63,8 @@ export class AttractionDetailsPage implements OnInit {
   }
 
   logout() {
-    this.attractionService.logout()
+    this.tripsService.resetTrips();
+    this.attractionService.logout();
   }
 
 }
