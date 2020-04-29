@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TripsService } from '../trips.service';
 import * as firebase from 'Firebase';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-my-trips',
@@ -23,6 +24,7 @@ export class MyTripsPage implements OnInit {
   constructor(
     private Router: Router,
     private tripsService: TripsService,
+    public alertController: AlertController
   ) {
       this.tripsService.getObservable().subscribe((data) => {
         this.trips = this.tripsService.trips;
@@ -40,7 +42,11 @@ export class MyTripsPage implements OnInit {
 
   /* takes the user to the create trip page */
   startNewTrip() {
-    this.Router.navigate(['create-trip']);
+    if(firebase.auth().currentUser != null) {
+      this.Router.navigate(['create-trip']);
+    } else {
+      this.presentAlert("You need to sign in before you can start a new trip.");
+    }
   }
 
   /* takes the user to the details page for their selected trip */
@@ -57,5 +63,15 @@ export class MyTripsPage implements OnInit {
     });
     console.log("log out")
     this.Router.navigate(['/login']);
+  }
+
+  /* presents an alert with message m */
+  async presentAlert(m:string) {
+    const alert = await this.alertController.create({
+      message: m,
+      buttons: ['OK']
+    });
+
+    await alert.present();
   }
 }
