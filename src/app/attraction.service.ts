@@ -145,4 +145,13 @@ export class AttractionService {
     return this.eventSubject;
   }
 
+  logout() {
+    firebase.auth().signOut().then(function() {
+
+    }).catch(function(error){
+      console.log("logout error: " + error)
+    });
+    this.router.navigate(['/login']);
+  }
+
 }

@@ -60,4 +60,8 @@ export class AttractionDetailsPage implements OnInit {
     await alert.present();
   }
 
+  logout() {
+    this.attractionService.logout()
+  }
+
 }

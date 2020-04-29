@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import * as firebase from 'Firebase';
 import { Router } from '@angular/router';
 import { Validators, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { AttractionService } from '../attraction.service';
@@ -31,13 +30,7 @@ export class AddAttractionPage implements OnInit {
   }
 
   logout() {
-    firebase.auth().signOut().then(function() {
-
-    }).catch(function(error){
-      console.log("logout error: " + error)
-    });
-    console.log("log out")
-    this.router.navigate(['/login']);
+    this.attractionService.logout()
   }
 
   addAttraction(attraction) {

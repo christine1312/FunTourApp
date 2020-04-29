@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import * as firebase from 'Firebase';
 import { Router } from '@angular/router';
 import { AttractionService } from '../attraction.service';
 
@@ -17,7 +16,6 @@ export class AttractionsPage implements OnInit {
 
   constructor(private router: Router,
     public attractionService:AttractionService) { 
-      console.log("in constructor")
 
       this.attractionService.getObservable().subscribe((data) => {
         this.allAttractions = this.attractionService.attractions;
@@ -28,10 +26,6 @@ export class AttractionsPage implements OnInit {
   ngOnInit() {
     this.allAttractions = this.attractionService.getAttractions();
     this.currentAttractions = this.attractionService.getAttractions();
-    
-    // console.log(this.currentAttractions)
-    //   console.log(this.allAttractions)
-    //   this.currentAttractions = this.allAttractions;
   }
 
 
@@ -69,13 +63,7 @@ export class AttractionsPage implements OnInit {
   }
 
   logout() {
-    firebase.auth().signOut().then(function() {
-
-    }).catch(function(error){
-      console.log("logout error: " + error)
-    });
-    console.log("log out")
-    this.router.navigate(['/login']);
+    this.attractionService.logout()
   }
 
 }
