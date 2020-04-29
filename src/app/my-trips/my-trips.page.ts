@@ -45,7 +45,7 @@ export class MyTripsPage implements OnInit {
     if(firebase.auth().currentUser != null) {
       this.Router.navigate(['create-trip']);
     } else {
-      this.presentAlert("You need to sign in before you can start a new trip.");
+      this.presentSignInAlert("You need to sign in before you can start a new trip.");
     }
   }
 
@@ -62,14 +62,23 @@ export class MyTripsPage implements OnInit {
       console.log("logout error: " + error)
     });
     console.log("log out")
+    this.tripsService.resetTrips();
     this.Router.navigate(['/login']);
   }
 
   /* presents an alert with message m */
-  async presentAlert(m:string) {
+  async presentSignInAlert(m:string) {
+    var self = this;
     const alert = await this.alertController.create({
       message: m,
-      buttons: ['OK']
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            self.Router.navigate(['login']);
+          }
+        }
+      ]
     });
 
     await alert.present();

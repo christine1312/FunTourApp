@@ -130,7 +130,7 @@ export class TripsService {
     } else {
       /* no one signed in */
       console.log("No one signed in");
-      self.presentAlert("Before you can see your trips, you need to sign in first");
+      self.presentSignInAlert("Before you can see your trips, you need to sign in first");
     }
   }
 
@@ -197,5 +197,26 @@ export class TripsService {
     await alert.present();
   }
 
+  /* presents an alert with message m */
+  async presentSignInAlert(m:string) {
+    var self = this;
+    const alert = await this.alertController.create({
+      message: m,
+      buttons: [
+        {
+          text: 'OK',
+          handler: () => {
+            self.Router.navigate(['login']);
+          }
+        }
+      ]
+    });
 
+    await alert.present();
+  }
+
+  /* resets trips for logouts */
+  resetTrips() {
+    this.trips = [];
+  }
 }
