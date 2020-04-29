@@ -21,8 +21,21 @@
 
 <ion-content>
 
+  <div id="searchElements">    
+
+    <ion-label color="primary" position="floating">Filter attraction by city</ion-label>
+      <ion-input id="city" type="text" placeholder="Where would you like to go?" [(ngModel)]='searchbar'></ion-input>
+
+
+    <ion-button class="clear-btn" expand="block" type="submit" (click)="clear()">Clear</ion-button>
+    <ion-button class="submit-btn" expand="block" type="submit" (click)="search()">Filter by city</ion-button>
+  </div>
+
+  <!-- <ion-searchbar [(ngModel)]="searchbar" autocomplete="on" placeholder="Search by city"></ion-searchbar> -->
+
+  <h3 id="listTitle">{{ listTitle }}</h3>
   <ion-list>
-    <ion-item *ngFor = "let attraction of attractions" (click) = "goToAttraction(attraction)">
+    <ion-item *ngFor = "let attraction of currentAttractions" (click) = "goToAttraction(attraction)">
       <ion-label>
         {{ attraction.name }}
       </ion-label>

@@ -10,19 +10,30 @@ import { AttractionService } from '../attraction.service';
 })
 export class AttractionsPage implements OnInit {
 
-      attractions = [];
+      allAttractions = [];
+      currentAttractions = [];
+      searchbar = "";
+      listTitle = "All attractions";
 
   constructor(private router: Router,
     public attractionService:AttractionService) { 
+      console.log("in constructor")
 
       this.attractionService.getObservable().subscribe((data) => {
-        this.attractions = this.attractionService.attractions;
+        this.allAttractions = this.attractionService.attractions;
+        this.currentAttractions = this.attractionService.attractions;
       });
   }
 
   ngOnInit() {
-    this.attractions = this.attractionService.getAttractions();
+    this.allAttractions = this.attractionService.getAttractions();
+    this.currentAttractions = this.attractionService.getAttractions();
+    
+    // console.log(this.currentAttractions)
+    //   console.log(this.allAttractions)
+    //   this.currentAttractions = this.allAttractions;
   }
+
 
   addAttraction() {
     this.router.navigate(['/add-attraction']);
@@ -30,6 +41,31 @@ export class AttractionsPage implements OnInit {
 
   goToAttraction(attraction) {
     this.router.navigate(['/attraction-details', attraction])
+  }
+
+  search() {
+    let attractionsByCity = this.filterByCity()
+    this.currentAttractions = attractionsByCity;
+    this.listTitle = "All attractions in " + this.searchbar.substring(0,1).toUpperCase() + this.searchbar.substring(1).toLowerCase();
+    this.searchbar = "";
+  }
+
+  filterByCity() {
+    let attractionsByCity = [];
+    for(let attraction of this.allAttractions) {
+      let searchedCity = this.searchbar.toLowerCase()
+      let attractionCity = attraction.city.toLowerCase()
+      if(searchedCity === attractionCity) {
+        attractionsByCity.push(attraction)
+      }
+    }
+    return attractionsByCity;
+  }
+
+  clear() {
+    this.currentAttractions = this.attractionService.getAttractions();
+    this.listTitle = "All attractions";
+    this.searchbar = "";
   }
 
   logout() {

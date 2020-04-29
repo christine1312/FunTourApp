@@ -54,7 +54,7 @@ export class LoginPage implements OnInit {
       //The signed-in user info
       var user = result.user;
       console.log("google login succeeded")
-      self.router.navigate(["/folder/MyPlan"]);
+      self.router.navigate(["/my-trips"]);
     });
   }
 
@@ -69,7 +69,7 @@ export class LoginPage implements OnInit {
       console.log(token)
       var user = result.user;
       console.log(user);
-      self.router.navigate(['/folder/MyPlan']);
+      self.router.navigate(['/my-trips']);
     })
   }
 
