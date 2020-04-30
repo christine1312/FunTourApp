@@ -16,21 +16,9 @@ export class TripDetailsPage implements OnInit {
 
   /* packing list for a given trip */
   packing_list = [];
-  /* fake collection for testing
-  packing_list = [
-    {"name":"bags of chips", "category":"food", "quantity":"3", "who":"Jeff"},
-    {"name":"bottles of water", "category":"drink", "quantity":"10", "who":"Karen"},
-    {"name":"first aid kit", "category":"first-aid", "quantity":"1", "who":"Kevin"}
-  ];*/
 
   /* list of travelers for a trip */
   travelers = [];
-  /* fake collection for testing
-  travelers = [
-    {"name":"Jeff", "phone":"xxx-xxx-xxx", "items":"bags of chips", "needs":"contacts"},
-    {"name":"Karen", "phone":"xxx-xxx-xxx", "items":"bottles of water", "needs":"allergy medicine"},
-    {"name":"Kevin", "phone":"xxx-xxx-xxx", "items":"first-aid kit", "needs":"glasses"}
-  ];*/
   
   constructor(
     private Router: Router,
